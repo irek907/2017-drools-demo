@@ -27,6 +27,8 @@ public class BookServiceImpl implements IBookService {
 		kSession.insert(b);
 		System.out.println("fact对象输入");
 		
+		
+		
 		//kSession.
 		kSession.fireAllRules();
 
