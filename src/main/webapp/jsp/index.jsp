@@ -28,15 +28,19 @@ div {
 
 	<div style="text-align: center !important">
 		<h2>Drools 规则动态更新到数据库</h2>
+		规则名称:<input id="r_name" value="my_rule" readonly="readonly" />
+		<button onclick="getPlainTxt()">更新规则到据库</button>
+		<button onclick="setContent()">刷新规则</button>
+		<br>
 		<textarea id="editor" rows="30" cols="100"></textarea>
 		<div id="btns">
 			<div>
-				规则名称:<input id="r_name" value="my_rule" readonly="readonly" />
+				
 				value:<input id="r_type" value="1" />
-				<button onclick="getPlainTxt()">更新规则到据库</button>
+				
 				<button onclick="testRule()">测试规则</button>
 
-				<button onclick="setContent()">获取规则</button>
+				
 
 
 			</div>
@@ -75,6 +79,7 @@ div {
     			 //UE.getEditor('editor').setContent(json, false);
     			 
     			 $("#editor").val(json);
+    			 alert("OK");
     			 //console.info(json);
     		},
     		error : function(XMLHttpRequest, textStatus, errorThrown) {
