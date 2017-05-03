@@ -138,16 +138,8 @@ public class BookController {
 	@ResponseBody
 	public Object testrule(String r_name,String r_content,HttpServletRequest request) throws UnsupportedEncodingException{
 
-		/*Book b = new Book();
-		b.setBasePrice(100);
-		b.setClz("computer");
-		b.setName("C plus programing");
-		b.setSalesArea("China");
-		b.setYears(2);
-		*/
 
-		//		double realPrice = iBookService.getBookSalePrice(b);
-		
+		/*
 		Message2 message1 = new Message2();  
 		message1.setStatus(Integer.parseInt(r_name));  
 		message1.setMsg("hello world!");  
@@ -161,11 +153,28 @@ public class BookController {
 		kSession.fireAllRules();  
 
 		request.setAttribute("book", message1);
-		//System.out.println(b.getName() + ":" + b.getBasePrice());
 
 
 
-		return message1;
+		return message1;*/
+		initRulePool();
+		Book b = new Book();
+		b.setBasePrice(100);
+		b.setClz("computer");
+		b.setName("C plus programing");
+		b.setSalesArea("China");
+		b.setYears(2);
+
+		KnowledgeBase kBase = KnowledgeBaseFactory.newKnowledgeBase();  
+		kBase.addKnowledgePackages(kb.getKnowledgePackages());  
+		kSession = kBase.newStatefulKnowledgeSession();  
+		kSession.insert(b);  
+		kSession.fireAllRules();  
+		request.setAttribute("book", b);
+		
+		System.out.println(b.getName() + ":" + b.getBasePrice());
+
+		return b;
 
 	}
 
