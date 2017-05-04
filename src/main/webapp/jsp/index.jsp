@@ -3,14 +3,12 @@
 
 
 <%
-	
 	String path = request.getContextPath();
-	String myrule = 
-	
-	(String)request.getSession().getAttribute("myrule");
+	String myrule =
+
+	(String) request.getSession().getAttribute("myrule");
 	//System.out.println(myrule);
-	
-	%>
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -33,21 +31,65 @@ div {
 		<button onclick="setContent()">刷新规则</button>
 		<br>
 		<textarea id="editor" rows="30" cols="100"></textarea>
-		<div id="btns">
-			<div>
-				
-				value:<input id="r_type" value="1" />
-				
-				<button onclick="testRule()">测试规则</button>
+		<div id="btns" style="algin:center">
+		
 
+				<table style="margin:auto;">
+
+					<tr>
+						<td>定价：
+						</td>
+						<td><input id="basePrice" value="100"/></td>
+					</tr>
+					<tr>
+						<td>分类：</td>
+						
+						<td><select id="clz">
+								<option value="computer">computer</option>
+								<option value="Other">Other</option>
+
+						</select>
+						</td>
+					</tr>
+			<tr>
+						<td>书名：
+						</td>
+						<td><input id="name" value="C plus programing"/></td>
+					</tr>
+			<tr>
+						<td>区域：
+						</td>
+						<td>
+			<select id="salesArea">
+			<option value="China">China</option>
+			<option value="Other">Other</option>
+			
+			</select>
+			</td>
+			
+			
+					</tr>
+			<tr>
+						<td>距今年份：
+						</td>
+						<td><input id="years" value="2"/></td>
+					</tr>
+			<tr>
+						<td>售价：
+						<td>
+						<td><label id="salesPrice" style="color:red">$</label></td>
+					</tr>
+			
+			<tr> <td colspan="2" style ="text-align: center"><button onclick="testRule()">测试</button></td>
+					</tr>
+			
+			</table>
 				
-
-
-			</div>
+		
 
 
 		</div>
-		<div></div>
+		
 	</div>
 	<script type="text/javascript">
 
@@ -79,7 +121,7 @@ div {
     			 //UE.getEditor('editor').setContent(json, false);
     			 
     			 $("#editor").val(json);
-    			 alert("OK");
+    			// alert("OK");
     			 //console.info(json);
     		},
     		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -129,12 +171,17 @@ div {
     		async : false,
     		dataType : "json",
     		data : {
-    			"r_content" : "",
-    			"r_name":$("#r_type").val()
+    			"clz" : $("#clz").val(),
+    			"name":$("#name").val(),
+    			"salesArea":$("#salesArea").val(),
+    			"years":$("#years").val(),
+    			"basePrice":$("#basePrice").val()
     		},
     		success : function(json, textStatus) {
-    			console.info(json);
-    			alert(JSON.stringify(json));
+    			//console.info(json);
+    			//alert(JSON.stringify(json));
+    			
+    			$("#salesPrice").text(json.salesPrice+"￥");
     		},
     		error : function(XMLHttpRequest, textStatus, errorThrown) {
     			alert("服务端异常！", "error");
@@ -145,25 +192,28 @@ div {
     function getRule(){
     	jQuery.ajax( {
     		url :  "<%=path%>/book/getrule.do",
-    		type : "POST",
-    		cache : false,
-    		async : false,
-    		dataType : "json",
-    		data : {
-    			"r_content" : "",
-    			"r_name":""
-    		},
-    		success : function(json, textStatus) {
-    			
-    			//alert(json);
-    			// UE.getEditor('editor').setContent(json, false);
-    			 //console.info(json);
-    		},
-    		error : function(XMLHttpRequest, textStatus, errorThrown) {
-    			setMessage("服务端异常！", "error");
-    		}
-    	});
-    }
-</script>
-</body>
+				type : "POST",
+				cache : false,
+				async : false,
+				dataType : "json",
+				data : {
+					"r_content" : "",
+					"r_name" : ""
+				},
+				success : function(json, textStatus) {
+
+					//alert(json);
+					// UE.getEditor('editor').setContent(json, false);
+					//console.info(json);
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					setMessage("服务端异常！", "error");
+				}
+			});
+		}
+	</script>
+	
+	
+	</body>
+						
 </html>

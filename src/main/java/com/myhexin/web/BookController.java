@@ -136,7 +136,7 @@ public class BookController {
 
 	@RequestMapping(value = "/testrule")
 	@ResponseBody
-	public Object testrule(String r_name,String r_content,HttpServletRequest request) throws UnsupportedEncodingException{
+	public Object testrule(String clz,String name,String salesArea,String years,String basePrice,HttpServletRequest request) throws UnsupportedEncodingException{
 
 
 		/*
@@ -159,11 +159,11 @@ public class BookController {
 		return message1;*/
 		initRulePool();
 		Book b = new Book();
-		b.setBasePrice(100);
-		b.setClz("computer");
-		b.setName("C plus programing");
-		b.setSalesArea("China");
-		b.setYears(2);
+		b.setBasePrice(Double.parseDouble(basePrice));
+		b.setClz(clz);
+		b.setName(name);
+		b.setSalesArea(salesArea);
+		b.setYears(Integer.parseInt(years));
 
 		KnowledgeBase kBase = KnowledgeBaseFactory.newKnowledgeBase();  
 		kBase.addKnowledgePackages(kb.getKnowledgePackages());  
