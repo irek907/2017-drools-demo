@@ -36,7 +36,7 @@ rule "china area sales price rule"
         b : Book( salesArea == "China" )
     then
    		System.out.println("china book");
-        b.setSalesPrice(b.getSalesPrice()-2);
+        b.setSalesPrice(b.getSalesPrice()-3);
         
 end
 
